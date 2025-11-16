@@ -39,11 +39,7 @@ export CROSS_COMPILE=arm-linux-gnueabihf-
 
 make kernelversion
 cp config-5.10.168-ti-r83 $KBUILD_OUTPUT/.config
-sed -e /^CONFIG_USB_F_ACM=y/s/y/n/ \
-    -e /^CONFIG_USB_F_SERIAL=y/s/y/n/ \
-    -e /^CONFIG_USB_CONFIGFS_SERIAL=y/s/y/n/ \
-    -e /^CONFIG_USB_CONFIGFS_ACM=y/s/y/n/ \
-    -i $KBUILD_OUTPUT/.config
+sed -f config.sed -i $KBUILD_OUTPUT/.config
 make oldconfig
 make kernelrelease
 
@@ -53,8 +49,17 @@ make  dtbs_install     INSTALL_PATH=boot_install
 make  modules_install  INSTALL_MOD_PATH=modules_install
 make  headers_install  INSTALL_HDR_PATH=headers_install
 ```
-You now have a new kernel and stuffs.  On Fedora, for some reason, `make zinstall`
-line doen't work, so you have to copy the 3 files manually.
+where `confi.sed` changes 2 kernel drivers (`usb_f_acm`, `usb_f_serial`) from builtin
+to external modules.
+```
+/^CONFIG_USB_F_ACM=y/s/y/n/
+/^CONFIG_USB_F_SERIAL=y/s/y/n/
+/^CONFIG_USB_CONFIGFS_SERIAL=y/s/y/n/
+/^CONFIG_USB_CONFIGFS_ACM=y/s/y/n/
+```
+You now have a new kernel and stuffs.  It's the same as the old, except for the 2 modules.
+On Fedora, for some reason, `make zinstall` line doen't work, so you have to copy
+3 files manually.
 To collect them into your own directory, say `~/boot`,
 ```
 cd $KBUILD_OUTPUT
