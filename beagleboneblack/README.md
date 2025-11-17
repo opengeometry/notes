@@ -38,7 +38,7 @@ export ARCH=arm
 export CROSS_COMPILE=arm-linux-gnueabihf-
 
 make kernelversion
-sed -f config.sed < ../config-5.10.168-ti-r83 > $KBUILD_OUTPUT/.config
+sed -f config.sed  config-5.10.168-ti-r83 > $KBUILD_OUTPUT/.config
 make oldconfig
 make kernelrelease
 
