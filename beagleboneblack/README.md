@@ -57,14 +57,13 @@ to external modules.
 /^CONFIG_USB_CONFIGFS_ACM=y/s/y/n/
 ```
 You now have a new kernel and stuffs.  It's the same as the old, except for the 2 modules.
-On Fedora, for some reason, `make zinstall` line doen't work, so you have to copy
-3 files manually.
-To collect them into your own directory, say `~/boot`,
+On Fedora, for some reason, `make zinstall` line doen't work, so you have to do that step manually.
+Finally, make tarballs of the 3 installed locations.
 ```
 cd $KBUILD_OUTPUT
-  tar  -cJf  ~/boot/boot-$KBUILD_OUTPUT.tar.xz     boot_install
-  tar  -cJf  ~/boot/modules-$KBUILD_OUTPUT.tar.xz  modules_install
-  tar  -cJf  ~/boot/headers-$KBUILD_OUTPUT.tar.xz  headers_install
+  tar  -cJf  boot-$KBUILD_OUTPUT.tar.xz     boot_install
+  tar  -cJf  modules-$KBUILD_OUTPUT.tar.xz  modules_install
+  tar  -cJf  headers-$KBUILD_OUTPUT.tar.xz  headers_install
 ```
 
 
