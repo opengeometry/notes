@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # William Park <opengeometry@yahoo.ca>
-# 2018-2025
+# 2025
 #
 # Usage:
 # -----
@@ -25,19 +25,6 @@
 # 	- https://docs.kernel.org/filesystems/configfs.html
 # 	- https://github.com/qlyoung/keyboard-gadget
 #	- https://github.com/ppolstra/UDeck
-#
-# Original work:
-# --------------
-# Original keyboard scripts (create-hid.sh, udeckHid.py) for BBB was written
-# by Phil Polstra:
-#	- media.defcon.org/DEF CON 23/DEF CON 23 presentations/DEFCON-23-Phil-Polstra-Extras.rar
-#	- github.com/ppolstra/UDeck/
-# 
-# - It worked for older images (Debian 8.7, 9.9, 10.13), but doesn't work for
-#   newer images (Debian 11.7, 12.12, 13.1, Kernel 5.x, 6.x).  
-#
-# - Original python script was written in Python2 which is no longer available
-#   in repository.
 #
 
 KB_DIR=/sys/kernel/config/usb_gadget/kb
