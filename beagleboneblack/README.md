@@ -11,7 +11,7 @@ Using USB Gadget driver, you can make BBB into a scriptable keyboard, mouse, and
 device.  This means, for an example, you can send out "key presses" from USB device port
 (mini-USB).  From USB host side (usually PC), it appears just like another keyboard.
 
-Original work on keyboard emulation on BBB was done by Phil Polstra (@ppolstra)
+Original work on keyboard emulation for BBB was done by Phil Polstra (@ppolstra)
   - [DEFCON-23-Phil-Polstra-Extras.rar](https://media.defcon.org/DEF%20CON%2023/DEF%20CON%2023%20presentations/DEF%20CON%2023%20-%20Phil-Polstra-Extras.rar)
   - [UDeck](https://github.com/ppolstra/UDeck)
 
