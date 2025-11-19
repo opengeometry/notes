@@ -79,11 +79,11 @@ will simulate mouse button1 clicked (press and release), and then moving 127 to 
 ```
 printf %b '\x00\x00\x40\x00\x40' > /dev/hidg2
 ```
-will move the mouse to the centre of screen, no matter where it was.  The screen X,Y
-coordinates are absolute instead of the normal relative.  And, the X,Y rnages are 
-scaled from [1,32767] or [1,0x7fff], so the center coordinate is exactly (0x4000,0x4000).
+will move mouse to the centre of screen, no matter where it was.  The X,Y ranges are 
+scaled from 1 to 32767 or 0x7fff.  So, (1, 1) is top left corner, (0x7fff, 0x7fff)
+is bottom right corner, and the screen centre is exactly (0x4000, 0x4000).
 
-Actually, this absolute coordinates are more useful for "automated QA testing".
+This is very useful for "automated QA testing".
 
 
 ## Compiling a new kernel
