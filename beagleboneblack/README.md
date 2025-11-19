@@ -45,22 +45,28 @@ My work here solves these problems for newer BBB images with newer kernels.
 ### Sending text strings as "keyboard"
 
 ```
-./send_line.sh {A..Z}
-./send_line.sh {a..z}
+./send_line.sh {A..Z} {a..z}
 ```
 will send the alphabets, separated by a space and terminated by newline,
 to `/dev/hidg0`.  It's as though you typed the line on a real keyboard.  Internally,
 it will load shell functions from `send_functions.sh` which is rewrite of
 [udeckHid.py](https://github.com/ppolstra/UDeck/blob/master/udeckHid.py) in Shell.
 
+`send_line.sh` is just frontend.  You probably want to use functions in `send_functions.sh`
+directly, eg.
+```
+. send_functions.sh
+sendWindowKey d
+```
+which are the same as pressing Windows+D (show desktop) key.
 
 
 ### Sending mouse click and movement as "mouse"
 
 ```
-printf %b \\x01 \\x00 \\x00 > /dev/hidg1
-printf %b \\x00 \\x00 \\x00 > /dev/hidg1
-printf %b \\x00 \\x7f \\x00 > /dev/hidg1 
+printf %b '\x01\x00\x00' > /dev/hidg1
+printf %b '\x00\x00\x00' > /dev/hidg1
+printf %b '\x00\x7f\x00' > /dev/hidg1 
 ```
 will simulate mouse button1 clicked (press and release), and then moving 127 to right.
 
@@ -68,7 +74,7 @@ will simulate mouse button1 clicked (press and release), and then moving 127 to 
 ### Moving mouse as "touch screen"
 
 ```
-printf %b \\x00 \\x00 \\x40 \\x00 \\x40 > /dev/hidg2
+printf %b '\x00\x00\x40\x00\x40' > /dev/hidg2
 ```
 will move the mouse to the centre of screen, no matter where it was.  The screen X,Y
 coordinates are scaled from [1,32767] or [1,0x7fff], so the center coordinate is exactly
