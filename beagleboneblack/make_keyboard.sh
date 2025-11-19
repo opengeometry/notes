@@ -98,8 +98,8 @@ EOF
 # Byte 3: Y (-127 to 127) -- relative motion
 #
 # Eg.
-#	printf '%b' '\x01' '\x7f' '\x7f' > /dev/hidg1	# button 1, pressed/moved
-#	printf '%b' '\x00' '\x00' '\x00' > /dev/hidg1	# button released
+#	printf %b '\x01\x7f\x7f'	# button 1, pressed/moved
+#	printf %b '\x00\x00\x00'	# button released
 #
 # Use this.
 #
@@ -110,24 +110,22 @@ cat_report_descriptor_mouse()
 	15 00 25 01 95 03 75 01 81 02 95 01 75 05 81 01
 	05 01 09 30 09 31 15 81 25 7f 75 08 95 02 81 06
 	c0 c0
+
 EOF
 }
 
 
 # https://eunomia.dev/tutorials/49-hid/
 # 
-# Relative motion mouse.
-#
-# Byte 1: Button states
+# Byte 1: Button
 #	bit 0: Left button
 #	bit 1: Right button
 #	bit 2: Middle button
-# Byte 2: X movement (signed 8-bit, -127 to +127)
-# Byte 3: Y movement (signed 8-bit, -127 to +127)
+# Byte 2: X (-127 to 127) -- relative motion
+# Byte 3: Y (-127 to 127) -- relative motion
 #
-# Eg.
-#	printf '%b' '\x01' '\x7f' '\x7f' > /dev/hidg1	# button 1, pressed/moved
-#	printf '%b' '\x00' '\x00' '\x00' > /dev/hidg1	# button released
+# One difference:
+#	Input (constant)    #81 01 -> 03
 #
 cat_report_descriptor_mouse3()
 {
@@ -143,7 +141,7 @@ EOF
 # Google AI:
 #	- subclass = 1		-- Boot Interface subclass
 #	- protocol = 2		-- Mouse protocol
-#	- report_length = 8	-- 8 bytes
+#	- report_length = 5	-- 5 bytes
 #
 # Byte 1: Buttons
 # Byte 2,3: X (1 to 32767=0x7fff, scaled) -- #26 xL xH
@@ -152,11 +150,11 @@ EOF
 # - range is scaled, so the center of screen is (0x4000,0x4000).
 #
 # - to move to the centre,
-#	printf '%b' '\x00' '\x00' '\x40' '\x00' '\x40'
+#	printf %b '\x00\x00\x40\x00\x40'
 #
 # - to click button 1, press and release
-#	printf '%b' '\x01' '\x00' '\x00' '\x00' '\x00' > /dev/hidg2
-#	printf '%b' '\x00' '\x00' '\x00' '\x00' '\x00' > /dev/hidg2
+#	printf %b '\x01\x00\x00\x00\x00'
+#	printf %b '\x00\x00\x00\x00\x00'
 #
 cat_report_descriptor_mouse_screen()
 {
