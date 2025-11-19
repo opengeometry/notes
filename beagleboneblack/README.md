@@ -5,21 +5,24 @@
   - [send_line.sh](send_line.sh) --- sends string arguments, separated by a space and terminated by newline.
 
 
-## BBB as scriptable keyboard
+## BBB as scriptable keyboard, mouse, and touch screen
 
-You can make BBB into a scriptable keyboard using USB Gadget driver.  This means,
-you can send out "key presses" from USB device port (mini-USB).  From USB host side,
-it appears just like another keyboard.
+Using USB Gadget driver, you can make BBB into a scriptable keyboard, mouse, and touchscreen
+device.  This means, for an example, you can send out "key presses" from USB device port
+(mini-USB).  From USB host side (usually PC), it appears just like another keyboard.
 
-Original work on BBB was done by Phil Polstra (@ppolstra)
+Original work on keyboard emulation on BBB was done by Phil Polstra (@ppolstra)
   - [DEFCON-23-Phil-Polstra-Extras.rar](https://media.defcon.org/DEF%20CON%2023/DEF%20CON%2023%20presentations/DEF%20CON%2023%20-%20Phil-Polstra-Extras.rar)
   - [UDeck](https://github.com/ppolstra/UDeck)
 
-It worked for older images (Debian 8.7, 9.9, 10.13), but doesn't work for newer images 
+It works for older images (Debian 8.7, 9.9, 10.13), but doesn't work for newer images 
 (Debian 11.7, 12.12, 13.1, Kernel 5.x, 6.x).  Also, original scripts were written in Python2
 which is no longer available in repository for BBB.
 
-My work here solves these problems for newer BBB images with newer kernels.
+My work here 
+  - solves these problems for newer BBB images with newer kernels, and
+  - includes the emulation of keyboard, mouse, and touchscreen (absolute mouse).
+
 
 ### Creating/Removing USB Gadget devices
 
@@ -77,8 +80,10 @@ will simulate mouse button1 clicked (press and release), and then moving 127 to 
 printf %b '\x00\x00\x40\x00\x40' > /dev/hidg2
 ```
 will move the mouse to the centre of screen, no matter where it was.  The screen X,Y
-coordinates are scaled from [1,32767] or [1,0x7fff], so the center coordinate is exactly
-(0x4000,0x4000).  You can, of course, click as usual.
+coordinates are absolute instead of the normal relative.  And, the X,Y rnages are 
+scaled from [1,32767] or [1,0x7fff], so the center coordinate is exactly (0x4000,0x4000).
+
+Actually, this absolute coordinates are more useful for "automated QA testing".
 
 
 ## Compiling a new kernel
