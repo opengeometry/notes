@@ -136,13 +136,16 @@ declare -A AsciiToKey=(
 #	
 sendKey()	# modifier keycode
 {
-    local modifier=$1 keycode=$2
+    local -i modifier=$1 keycode=$2
 
-    local modL=$(printf '\\x%02x' $modifier)
-    local keyL=$(printf '\\x%02x' $keycode)
+    # Put the keycode at the end, to avoid problem with missing 'G' and 'g'.
+    # Somehow, system sees 'G' and 'g' (keycode=0x0a) as '\n' and doesn't send
+    # the entire 8 byte record.
+    #
+    local pressed=$(printf '\\x%02x' $((modifier%256)) 0 0 0  0 0 0 $((keycode%256)))
+    local released=$(printf '\\x%02x' 0 0 0 0  0 0 0 0)
 
-    printf "%b" $modL  '\x00' $keyL  '\x00' '\x00' '\x00' '\x00' '\x00' > /dev/hidg0
-    printf "%b" '\x00' '\x00' '\x00' '\x00' '\x00' '\x00' '\x00' '\x00' > /dev/hidg0
+    printf '%b' "$pressed" "$released" > /dev/hidg0
 }
 
 sendModChar()	# modifier char

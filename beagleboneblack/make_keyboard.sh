@@ -5,11 +5,11 @@
 #
 # Usage:
 # -----
-#	sudo $0 list
-#	sudo $0 stopall
 #	sudo $0 start [keyboard, mouse, screen]
 #	sudo $0 stop
 #	sudo $0 clean
+#	sudo $0 list
+#	sudo $0 stopall
 #
 # This script creates USB Gadget devices on BeagleBone Black (BBB) board,
 #
@@ -49,11 +49,11 @@ Usage()
 {
     cat <<EOF
 Usage:
-    sudo $0 list
-    sudo $0 stopall
     sudo $0 start [keyboard, mouse, screen]
     sudo $0 stop
     sudo $0 clean
+    sudo $0 list
+    sudo $0 stopall
 EOF
 }
 
@@ -291,11 +291,11 @@ do_stopall()
 
 
 case $ACTION in
-    list)     do_list     ;;
-    stopall)  do_stopall  ;;
     start)    do_start    ;;
     stop)     do_stop     ;;
     clean)    do_clean    ;;
+    list)     do_list     ;;
+    stopall)  do_stopall  ;;
     *)        Usage       ;;
 esac
 
