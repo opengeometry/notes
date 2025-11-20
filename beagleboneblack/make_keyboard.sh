@@ -167,6 +167,15 @@ EOF
 }
 
 
+# Create 3 USB Gadget devices
+#	/dev/hidg0 --- regular keyboard
+#	/dev/hidg1 --- regular mouse, with relative motion
+#	/dev/hidg2 --- screen or absolute mouse, a basic one-finger touchscreen
+#
+# You can specify 0, 1, 2, or all 3 devices, and it will start creating from
+# /dev/hidg0 and up.  If you specify 0 device, then it will simply activate
+# (ie. turn on) devices previously deactivated with stop action.
+#
 do_start()
 {
     modprobe usb_f_hid
@@ -235,6 +244,8 @@ do_start()
 }
 
 
+# Deactivate (ie. turn off) devices.
+#
 do_stop()
 {
     if cd $KB_DIR; then
@@ -243,7 +254,7 @@ do_stop()
 }
 
 
-# Undo what has been done, in reverse order.
+# Undo what has been done in creating, in reverse order.
 # 
 # find /sys/kernel/config/usb_gadget/kb/ -type l -delete
 # find /sys/kernel/config/usb_gadget/kb/ -type d \( -name hid.usb? -o -name 0x409 -o -name c.1 \) -delete
@@ -261,12 +272,18 @@ do_clean()
 }
 
 
+# List all USB Gadgets found in the system.
+#
 do_list()
 {
     ls /sys/kernel/config/usb_gadget/
 }
 
 
+# Deactivate (ie. turn off) all USB Gadgets found in the system.  Needed to
+# create your own keyboard, mouse, screen devices.  Otherwise, it will
+# complain "it's being used".
+#
 do_stopall()
 {
     for i in /sys/kernel/config/usb_gadget/*; do
