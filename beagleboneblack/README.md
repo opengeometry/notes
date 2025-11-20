@@ -29,13 +29,13 @@ My work here
 1. `sudo ./make_keyboard.sh start [keyboary mouse screen]` --- will create 3 USB Gadget devices
     - `/dev/hidg0` --- regular keyboard
     - `/dev/hidg1` --- regular mouse, with relative motion
-    - `/dev/hidg2` ---- screen or absolute mouse, a basic one-finger touchscreen
+    - `/dev/hidg2` --- screen or absolute mouse, a basic one-finger touchscreen
 
    You can specify 0, 1, 2, or all 3 devices, and it will start creating from `/dev/hidg0` and up.
-   If you specify 0 device, then it will simply activate devices previously deactivated with
+   If you specify 0 device, then it will simply activate (ie. turn on) devices previously deactivated with
    `stop` action.
   
-3. `sudo ./make_keyboard.sh stop` --- deactivates devices created with previously `start` action.
+3. `sudo ./make_keyboard.sh stop` --- deactivates (ie. turn off) devices created with previously `start` action.
 
 4. `sudo ./make_keyboard.sh clean` --- removes and cleans up all devices previously created with
    `start` action.  You will have to recreate them, later.
