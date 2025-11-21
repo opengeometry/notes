@@ -4,11 +4,10 @@
   - [send_functions.sh](send_functions.sh) --- collection of shell functions
   - [send_line.sh](send_line.sh) --- sends string arguments, separated by a space and terminated by newline.
 
-----
-----
 
-## BBB as scriptable keyboard, mouse, and touch screen
-
+----
+## 1. BBB as scriptable keyboard, mouse, and touch screen
+----
 Using USB Gadget driver, you can make BBB into a scriptable keyboard, mouse, and touchscreen
 device.  This means, for an example, you can send out "key presses" from USB device port
 (mini-USB).  From USB host side (usually PC), it appears just like another keyboard.
@@ -88,9 +87,8 @@ is bottom right corner, and the screen centre is exactly (0x4000, 0x4000).
 This is very useful for "automated QA testing".
 
 ----
+## 2. Compiling a new kernel
 ----
-
-## Compiling a new kernel
 
 It's similiar to compiling a kernel on PC, except you also need to install **.dtb**.
 You can compile on BBB (slooow) or cross-compile on PC (faster, recommended).
