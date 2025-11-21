@@ -4,6 +4,8 @@
   - [send_functions.sh](send_functions.sh) --- collection of shell functions
   - [send_line.sh](send_line.sh) --- sends string arguments, separated by a space and terminated by newline.
 
+----
+----
 
 ## BBB as scriptable keyboard, mouse, and touch screen
 
@@ -85,6 +87,8 @@ is bottom right corner, and the screen centre is exactly (0x4000, 0x4000).
 
 This is very useful for "automated QA testing".
 
+----
+----
 
 ## Compiling a new kernel
 
